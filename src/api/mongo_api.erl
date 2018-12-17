@@ -15,7 +15,7 @@
 
 %% API
 -export([
-  connect/4,
+  connect/5,
   insert/3,
   find/4, find/6,
   find_one/5, find_one/4,
@@ -25,9 +25,9 @@
   ensure_index/3,
   disconnect/1]).
 
--spec connect(atom(), list(), proplists:proplist(), proplists:proplist()) -> {ok, pid()}.
-connect(Type, Hosts, TopologyOptions, WorkerOptions) ->
-  mongoc:connect({Type, Hosts}, TopologyOptions, WorkerOptions).
+-spec connect(atom(), binary(), list(), proplists:proplist(), proplists:proplist()) -> {ok, pid()}.
+connect(Type, Name, Hosts, TopologyOptions, WorkerOptions) ->
+  mongoc:connect({Type, Name, Hosts}, TopologyOptions, WorkerOptions).
 
 -spec insert(atom() | pid(), collection(), list() | map() | bson:document()) ->
   {{boolean(), map()}, list()}.
